@@ -16,14 +16,16 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      // const resp = await fetch("https://9tycxr-4550.preview.csb.app/users");
-      // const users = await resp.json();
-      const { data: users } = await axios.get(
-        "https://9tycxr-4550.preview.csb.app/users"
-      );
+      const resp = await fetch("https://9tycxr-4550.preview.csb.app/users");
+      console.log("resp: ", resp);
+      const data = await resp.json();
+      // const data = await axios.get("https://9tycxr-4550.preview.csb.app/users");
+      console.log("data: ", data);
 
-      console.log("users: ", users);
-      setUsers(users);
+      if (data) {
+        console.log("data: ", data);
+        setUsers(data);
+      }
 
       // 0. Add axios
       // 1. Add form for data to create user
