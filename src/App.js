@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
@@ -15,8 +16,12 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch("https://9tycxr-4550.preview.csb.app/users");
-      const users = await resp.json();
+      // const resp = await fetch("https://9tycxr-4550.preview.csb.app/users");
+      // const users = await resp.json();
+      const { data: users } = await axios.get(
+        "https://9tycxr-4550.preview.csb.app/users"
+      );
+
       console.log("users: ", users);
       setUsers(users);
 
