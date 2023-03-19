@@ -22,21 +22,10 @@ export default function Form({ input, setInput }) {
   return (
     <form noValidate autoComplete="off" style={{ marginBottom: "2rem" }}>
       <TextField
-        sx={{ mr: 4 }}
-        label="First Name"
-        value={input.first}
-        onChange={handler("first")}
-      />
-      <TextField
-        sx={{ mr: 4 }}
-        label="Last Name"
-        value={input.last}
-        onChange={handler("last")}
-      />
-      <TextField
-        label="Email"
-        value={input.email}
-        onChange={handler("email")}
+        // sx={{ mr: 4 }}
+        label="Name"
+        value={input.name}
+        onChange={handler("name")}
       />
     </form>
   );

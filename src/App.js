@@ -9,7 +9,7 @@ import Notification from "./Notification";
 
 import "./styles.css";
 
-const URL = "https://9tycxr-4550.preview.csb.app";
+const URL = "https://9tycxr-4550.preview.csb.app/api";
 
 // ==================================================
 
@@ -20,35 +20,33 @@ export default function App() {
 
   // --------------------------------------------
 
-  useEffect(() => {
-    (async () => {
-      const resp = await fetch(`${URL}/users`);
-      console.log("resp: ", resp);
-      const data = await resp.json();
-      // const data = await axios.get("https://9tycxr-4550.preview.csb.app/users");
-      console.log("data: ", data);
+  // useEffect(() => {
+  //   (async () => {
+  //     const resp = await fetch(`${URL}/users`);
+  //     console.log("resp: ", resp);
+  //     const data = await resp.json();
+  //     // const data = await axios.get("https://9tycxr-4550.preview.csb.app/users");
+  //     console.log("data: ", data);
 
-      if (data) {
-        console.log("data: ", data);
-        setUsers(data);
-      }
+  //     if (data) {
+  //       console.log("data: ", data);
+  //       setUsers(data);
+  //     }
 
-      //  --1. Add form for data to create user
-      // 2. POST request to endpoint to create new user
-      // 3. Endpoint to store new user in DB
-      // 4. Send response for success / error
-      // 5. Handle response with appropriate error-handling on frontend
-      // 6. Need notification system to display errors
-      //    -https://mui.com/material-ui/react-snackbar
-    })();
-  }, []);
+  //     //  --1. Add form for data to create user
+  //     // 2. POST request to endpoint to create new user
+  //     // 3. Endpoint to store new user in DB
+  //     // 4. Send response for success / error
+  //     // 5. Handle response with appropriate error-handling on frontend
+  //     // 6. Need notification system to display errors
+  //     //    -https://mui.com/material-ui/react-snackbar
+  //   })();
+  // }, []);
 
   // --------------------------------------------
 
   const [input, setInput] = useState({
-    first: "",
-    last: "",
-    email: "",
+    name: "",
   });
 
   // --------------------------------------------
@@ -56,7 +54,8 @@ export default function App() {
   const addUserHandler = async () => {
     setNotification(`Sending request...`);
 
-    const url = `${URL}/user`;
+    const url = `${URL}/users`;
+
     const resp = await fetch(url, {
       method: "POST",
       headers: {
@@ -72,23 +71,60 @@ export default function App() {
 
   // --------------------------------------------
 
+  const comingSoon = () => alert("coming soon");
+
+  // --------------------------------------------
+
+  const [cars, setCars] = useState([]);
+
+  const getAllCars = async () => {
+    setNotification(`Sending request...`);
+
+    const url = `${URL}/cars`;
+
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    console.log("data: ", data);
+    setNotification(`Response: ${data?.message}`);
+
+    setCars(data?.cars);
+  };
+
+  // --------------------------------------------
+
   return (
     <div className="App">
       <h1>CRUD App</h1>
 
       <Users {...{ users }} />
 
-      <h1>Create / Delete User</h1>
+      <h1>Create / Delete Car</h1>
       <Form {...{ input, setInput }} />
 
       <Stack spacing={2} direction="row">
-        <Button variant="outlined" onClick={addUserHandler}>
-          Delete User
+        <Button variant="outlined" onClick={comingSoon}>
+          Delete Car
         </Button>
-        <Button variant="contained" onClick={addUserHandler}>
-          Create User
+
+        <Button variant="contained" onClick={comingSoon}>
+          Get Car by ID
+        </Button>
+
+        <Button variant="contained" onClick={getAllCars}>
+          Get All Cars
+        </Button>
+
+        <Button variant="contained" onClick={comingSoon}>
+          Create Car
+        </Button>
+
+        <Button variant="contained" onClick={comingSoon}>
+          Update Car
         </Button>
       </Stack>
+
+      <p>{JSON.stringify(cars)}</p>
 
       <Notification {...{ notification, setNotification }} />
     </div>
