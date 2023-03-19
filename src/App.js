@@ -5,19 +5,24 @@ import Button from "@mui/material/Button";
 
 import Users from "./Users";
 import Form from "./Form";
+import Notification from "./Notification";
 
 import "./styles.css";
+
+const URL = "https://9tycxr-4550.preview.csb.app/api";
 
 // ==================================================
 
 export default function App() {
   const [users, setUsers] = useState([]);
 
+  const [notification, setNotification] = useState("");
+
   // --------------------------------------------
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch("https://9tycxr-4550.preview.csb.app/users");
+      const resp = await fetch(`${URL}/users`);
       console.log("resp: ", resp);
       const data = await resp.json();
       // const data = await axios.get("https://9tycxr-4550.preview.csb.app/users");
@@ -40,8 +45,29 @@ export default function App() {
 
   // --------------------------------------------
 
-  const addUserHandler = () => {
-    alert("todo -");
+  const [input, setInput] = useState({
+    first: "",
+    last: "",
+    email: "",
+  });
+
+  // --------------------------------------------
+
+  const addUserHandler = async () => {
+    setNotification(`Sending request...`);
+
+    const url = `${URL}/users`;
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ josh: "josh" }), // body data type must match "Content-Type" header
+    });
+    const data = await resp.json(); // parses JSON response into native JavaScript objects
+
+    console.log("data: ", data);
+    setNotification(`Response: ${data?.message}`);
   };
 
   // --------------------------------------------
@@ -53,7 +79,7 @@ export default function App() {
       <Users {...{ users }} />
 
       <h1>Create / Delete User</h1>
-      <Form />
+      <Form {...{ input, setInput }} />
 
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={addUserHandler}>
@@ -63,6 +89,8 @@ export default function App() {
           Create User
         </Button>
       </Stack>
+
+      <Notification {...{ notification, setNotification }} />
     </div>
   );
 }
