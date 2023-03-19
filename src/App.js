@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 import Users from "./Users";
+import Form from "./Form";
 
 import "./styles.css";
 
@@ -27,8 +28,7 @@ export default function App() {
         setUsers(data);
       }
 
-      // 0. Add axios
-      // 1. Add form for data to create user
+      //  --1. Add form for data to create user
       // 2. POST request to endpoint to create new user
       // 3. Endpoint to store new user in DB
       // 4. Send response for success / error
@@ -50,6 +50,11 @@ export default function App() {
     <div className="App">
       <h1>CRUD App</h1>
 
+      <Users {...{ users }} />
+
+      <h1>Create / Delete User</h1>
+      <Form />
+
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={addUserHandler}>
           Delete User
@@ -58,8 +63,6 @@ export default function App() {
           Create User
         </Button>
       </Stack>
-
-      <Users {...{ users }} />
     </div>
   );
 }
