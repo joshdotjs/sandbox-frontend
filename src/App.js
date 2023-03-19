@@ -57,6 +57,7 @@ export default function App() {
     setNotification(`Sending request...`);
 
     const url = `${URL}/users`;
+
     const resp = await fetch(url, {
       method: "POST",
       headers: {
