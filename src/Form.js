@@ -3,15 +3,7 @@ import { TextField } from "@mui/material";
 
 // ==================================================
 
-export default function Form() {
-  // ---------------------------------------------
-
-  const [input, setInput] = useState({
-    first: "",
-    last: "",
-    email: "",
-  });
-
+export default function Form({ input, setInput }) {
   // ---------------------------------------------
 
   const handler = (key) => (e) => {
