@@ -9,7 +9,7 @@ import Notification from "./Notification";
 
 import "./styles.css";
 
-const URL = "https://9tycxr-4550.preview.csb.app";
+const URL = "https://9tycxr-4550.preview.csb.app/api";
 
 // ==================================================
 
@@ -56,7 +56,8 @@ export default function App() {
   const addUserHandler = async () => {
     setNotification(`Sending request...`);
 
-    const url = `${URL}/user`;
+    const url = `${URL}/users`;
+
     const resp = await fetch(url, {
       method: "POST",
       headers: {
