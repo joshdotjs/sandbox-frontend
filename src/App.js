@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Users from "./Users";
 import Form from "./Form";
 import Notification from "./Notification";
+import GetCars from "./Get-Cars";
 
 import "./styles.css";
 
@@ -14,9 +15,7 @@ const URL = "https://9tycxr-4550.preview.csb.app/api";
 // ==================================================
 
 export default function App() {
-  const [users, setUsers] = useState([]);
-
-  const [notification, setNotification] = useState("");
+  // const [users, setUsers] = useState([]);
 
   // --------------------------------------------
 
@@ -51,23 +50,23 @@ export default function App() {
 
   // --------------------------------------------
 
-  const addUserHandler = async () => {
-    setNotification(`Sending request...`);
+  // const addUserHandler = async () => {
+  //   setNotification(`Sending request...`);
 
-    const url = `${URL}/users`;
+  //   const url = `${URL}/users`;
 
-    const resp = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ josh: "josh" }), // body data type must match "Content-Type" header
-    });
-    const data = await resp.json(); // parses JSON response into native JavaScript objects
+  //   const resp = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ josh: "josh" }), // body data type must match "Content-Type" header
+  //   });
+  //   const data = await resp.json(); // parses JSON response into native JavaScript objects
 
-    console.log("data: ", data);
-    setNotification(`Response: ${data?.message}`);
-  };
+  //   console.log("data: ", data);
+  //   setNotification(`Response: ${data?.message}`);
+  // };
 
   // --------------------------------------------
 
@@ -75,29 +74,17 @@ export default function App() {
 
   // --------------------------------------------
 
-  const [cars, setCars] = useState([]);
-
-  const getAllCars = async () => {
-    setNotification(`Sending request...`);
-
-    const url = `${URL}/cars`;
-
-    const resp = await fetch(url);
-    const data = await resp.json();
-
-    console.log("data: ", data);
-    setNotification(`Response: ${data?.message}`);
-
-    setCars(data?.cars);
-  };
-
-  // --------------------------------------------
-
   return (
     <div className="App">
       <h1>CRUD App</h1>
 
-      <Users {...{ users }} />
+      <hr />
+
+      <GetCars />
+
+      <hr />
+
+      {/* <Users {...{ users }} /> */}
 
       <h1>Create / Delete Car</h1>
       <Form {...{ input, setInput }} />
@@ -111,10 +98,6 @@ export default function App() {
           Get Car by ID
         </Button>
 
-        <Button variant="contained" onClick={getAllCars}>
-          Get All Cars
-        </Button>
-
         <Button variant="contained" onClick={comingSoon}>
           Create Car
         </Button>
@@ -123,10 +106,6 @@ export default function App() {
           Update Car
         </Button>
       </Stack>
-
-      <p>{JSON.stringify(cars)}</p>
-
-      <Notification {...{ notification, setNotification }} />
     </div>
   );
 }
