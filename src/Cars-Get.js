@@ -33,10 +33,10 @@ export default function GetCars({ cars, setCars }) {
 
   return (
     <>
-      <h1>Get All Cars</h1>
+      <h1>Read Cars</h1>
 
       <Button variant="contained" onClick={getAllCars}>
-        Get All Cars
+        Read Cars
       </Button>
 
       <CarsTable {...{ cars }} />
