@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
+
+import Cars from "./Cars";
 import Notification from "./Notification";
 
 const URL = "https://9tycxr-4550.preview.csb.app/api";
@@ -38,7 +40,7 @@ export default function GetCars() {
         Get All Cars
       </Button>
 
-      <p>{JSON.stringify(cars)}</p>
+      <Cars {...{ cars }} />
 
       <Notification {...{ notification, setNotification }} />
     </>

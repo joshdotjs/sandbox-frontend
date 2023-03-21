@@ -1,22 +1,14 @@
 import { useState, useEffect } from "react";
-// import axios from "axios";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import Users from "./Users";
-import Form from "./Form";
-import Notification from "./Notification";
 import GetCars from "./Get-Cars";
 
 import "./styles.css";
 
-const URL = "https://9tycxr-4550.preview.csb.app/api";
-
 // ==================================================
 
 export default function App() {
-  // const [users, setUsers] = useState([]);
-
   // --------------------------------------------
 
   // useEffect(() => {
@@ -84,10 +76,7 @@ export default function App() {
 
       <hr />
 
-      {/* <Users {...{ users }} /> */}
-
-      <h1>Create / Delete Car</h1>
-      <Form {...{ input, setInput }} />
+      {/* <Form {...{ input, setInput }} /> */}
 
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={comingSoon}>
