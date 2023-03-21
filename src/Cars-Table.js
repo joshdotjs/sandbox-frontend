@@ -14,7 +14,7 @@ const style = {
 
 // ==============================================
 
-export default function Users({ cars }) {
+export default function CarsTable({ cars }) {
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
       {cars.length > 0 &&
