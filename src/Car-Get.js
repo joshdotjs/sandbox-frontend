@@ -24,7 +24,8 @@ export default function GetCar() {
   const getCar = async () => {
     setNotification(`Sending request...`);
 
-    const url = `${URL}/cars/${Number(input.id)}`;
+    const { id } = input;
+    const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url);
     const data = await resp.json();
