@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-import CarForm from "./Car-Form";
+import CarForm from "./Car-Get-Form";
 import Notification from "./Notification";
 
 import URL from "./url";
@@ -14,7 +14,7 @@ export default function GetCar() {
   const [notification, setNotification] = useState("");
 
   const [input, setInput] = useState({
-    name: "",
+    id: null,
   });
 
   const [car, setCar] = useState();
@@ -24,9 +24,8 @@ export default function GetCar() {
   const getCar = async () => {
     setNotification(`Sending request...`);
 
-    const url = `${URL}/cars`;
+    const url = `${URL}/cars/${Number(input.id)}`;
 
-    // const resp = await fetch(url);
     const resp = await fetch(url);
     const data = await resp.json();
 
