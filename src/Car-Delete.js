@@ -9,7 +9,7 @@ import URL from "./url";
 
 // ==================================================
 
-export default function UpdateCar({ setCars }) {
+export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
 
   const [notification, setNotification] = useState("");
@@ -28,9 +28,9 @@ export default function UpdateCar({ setCars }) {
     const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url, {
-      method: "PATCH",
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }), // body data type must match "Content-Type" header
+      body: JSON.stringify({ name }),
     });
 
     const data = await resp.json();  
@@ -47,13 +47,12 @@ export default function UpdateCar({ setCars }) {
 
   return (
     <>
-      <h1>Update a Car</h1>
+      <h1>Delete a Car</h1>
 
-      <CarFormName {...{ input, setInput }} />
       <CarFormNumber {...{ input, setInput }} />
 
       <Button variant="contained" onClick={createCar}>
-        Update Car
+        Delete Car
       </Button>
 
       <Notification {...{ notification, setNotification }} />

@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import { useState } from "react";
 
 import GetCar from './Car-Get';
 import GetCars from "./Cars-Get";
 import CreateCar from "./Car-Create";
 import UpdateCar from "./Car-Update";
+import DeleteCar from "./Car-Delete";
 
 import "./styles.css";
 
@@ -14,13 +13,7 @@ import "./styles.css";
 export default function App() {
   // --------------------------------------------
 
-  console.log(process.env);
-
   const [cars, setCars] = useState([]);
-
-  // --------------------------------------------
-
-  const comingSoon = () => alert("coming soon");
 
   // --------------------------------------------
 
@@ -46,19 +39,8 @@ export default function App() {
 
       <hr />
 
-      <Stack spacing={2} direction="row">
-        <Button variant="outlined" onClick={comingSoon}>
-          Delete Car
-        </Button>
+      <DeleteCar {...{ setCars }} />
 
-        <Button variant="contained" onClick={comingSoon}>
-          Get Car by ID
-        </Button>
-
-        <Button variant="contained" onClick={comingSoon}>
-          Update Car
-        </Button>
-      </Stack>
     </div>
   );
 }
