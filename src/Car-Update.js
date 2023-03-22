@@ -1,55 +1,60 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-import CarForm from "./Car-Get-Form";
+import CarFormName from "./Car-Create-Form";
+import CarFormNumber from "./Car-Get-Form";
 import Notification from "./Notification";
 
 import URL from "./url";
 
 // ==================================================
 
-export default function GetCar() {
+export default function UpdateCar({ setCars }) {
   // ---------------------------------------------
 
   const [notification, setNotification] = useState("");
 
   const [input, setInput] = useState({
     id: null,
+    name: "",
   });
-
-  const [car, setCar] = useState();
 
   // --------------------------------------------
 
-  const getCar = async () => {
+  const createCar = async () => {
     setNotification(`Sending request...`);
 
-    const { id } = input;
+    const { id, name } = input;
     const url = `${URL}/cars/${id}`;
 
-    const resp = await fetch(url);
-    const data = await resp.json();
+    const resp = await fetch(url, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }), // body data type must match "Content-Type" header
+    });
 
+    const data = await resp.json();  
     console.log("data: ", data);
-    setNotification(data?.message);
 
-    // setCar(data?.cars);
-    setCar(data);
+    if (resp.ok) {
+      setCars(data?.cars);
+    }
+    
+    setNotification(data?.message);
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <h1>Get a Car</h1>
+      <h1>Update a Car</h1>
 
-      <CarForm {...{ input, setInput }} />
+      <CarFormName {...{ input, setInput }} />
+      <CarFormNumber {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={getCar}>
-        Get Car
+      <Button variant="contained" onClick={createCar}>
+        Update Car
       </Button>
-
-      <p>{ JSON.stringify(car) }</p>
 
       <Notification {...{ notification, setNotification }} />
     </>

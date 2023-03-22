@@ -52,8 +52,10 @@ export default function CreateCar({ setCars }) {
       <CarForm {...{ input, setInput }} />
 
       <Button variant="contained" onClick={createCar}>
-        Create a Car
+        Create Car
       </Button>
+
+      <Notification {...{ notification, setNotification }} />
     </>
   );
 }
