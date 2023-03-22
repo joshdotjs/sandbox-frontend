@@ -1,57 +1,54 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-import CarForm from "./Car-Create-Form";
+import CarForm from "./Car-Get-Form";
 import Notification from "./Notification";
 
 import URL from "./url";
 
 // ==================================================
 
-export default function CreateCar({ setCars }) {
+export default function GetCar() {
   // ---------------------------------------------
 
   const [notification, setNotification] = useState("");
 
   const [input, setInput] = useState({
-    name: "",
+    id: null,
   });
+
+  const [car, setCar] = useState();
 
   // --------------------------------------------
 
-  const createCar = async () => {
+  const getCar = async () => {
     setNotification(`Sending request...`);
 
-    const url = `${URL}/cars`;
+    const url = `${URL}/cars/${Number(input.id)}`;
 
-    // const resp = await fetch(url);
-    const resp = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: input.name }), // body data type must match "Content-Type" header
-    });
-
+    const resp = await fetch(url);
     const data = await resp.json();
 
     console.log("data: ", data);
     setNotification(data?.message);
 
-    setCars(data?.cars);
+    // setCar(data?.cars);
+    setCar(data);
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <h1>Create a Car</h1>
+      <h1>Get a Car</h1>
 
       <CarForm {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={createCar}>
-        Create a Car
+      <Button variant="contained" onClick={getCar}>
+        Get a Car
       </Button>
+
+      <p>{ JSON.stringify(car) }</p>
     </>
   );
 }
