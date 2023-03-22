@@ -24,7 +24,6 @@ export default function CreateCar({ setCars }) {
 
     const url = `${URL}/cars`;
 
-    // const resp = await fetch(url);
     const resp = await fetch(url, {
       method: "POST",
       headers: {
@@ -33,12 +32,15 @@ export default function CreateCar({ setCars }) {
       body: JSON.stringify({ name: input.name }), // body data type must match "Content-Type" header
     });
 
-    const data = await resp.json();
-
+    const data = await resp.json();  
     console.log("data: ", data);
-    setNotification(data?.message);
 
-    setCars(data?.cars);
+    
+    if (resp.ok) {
+      setCars(data?.cars);
+    }
+    
+    setNotification(data?.message);
   };
 
   // --------------------------------------------
