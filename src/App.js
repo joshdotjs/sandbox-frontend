@@ -13,6 +13,8 @@ import "./styles.css";
 export default function App() {
   // --------------------------------------------
 
+  console.log(process.env);
+
   const [cars, setCars] = useState([]);
 
   // --------------------------------------------
