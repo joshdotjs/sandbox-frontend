@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
+import GetCar from './Car-Get';
 import GetCars from "./Cars-Get";
 import CreateCar from "./Car-Create";
 
@@ -22,7 +23,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>CRUD App JOSH</h1>
+      <h1>CRUD App</h1>
 
       <hr />
 
@@ -31,6 +32,10 @@ export default function App() {
       <hr />
 
       <CreateCar {...{ setCars }} />
+
+      <hr />
+
+      <GetCar />
 
       <hr />
 
