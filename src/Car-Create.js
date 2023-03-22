@@ -54,6 +54,8 @@ export default function CreateCar({ setCars }) {
       <Button variant="contained" onClick={createCar}>
         Create a Car
       </Button>
+
+      <Notification {...{ notification, setNotification }} />
     </>
   );
 }

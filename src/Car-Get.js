@@ -49,6 +49,8 @@ export default function GetCar() {
       </Button>
 
       <p>{ JSON.stringify(car) }</p>
+
+      <Notification {...{ notification, setNotification }} />
     </>
   );
 }
