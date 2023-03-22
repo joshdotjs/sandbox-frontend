@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import GetCar from './Car-Get';
 import GetCars from "./Cars-Get";
 import CreateCar from "./Car-Create";
+import UpdateCar from "./Car-Update";
 
 import "./styles.css";
 
@@ -38,6 +39,10 @@ export default function App() {
       <hr />
 
       <GetCar />
+
+      <hr />
+
+      <UpdateCar {...{ setCars }} />
 
       <hr />
 

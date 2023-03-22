@@ -45,7 +45,7 @@ export default function GetCar() {
       <CarForm {...{ input, setInput }} />
 
       <Button variant="contained" onClick={getCar}>
-        Get a Car
+        Get Car
       </Button>
 
       <p>{ JSON.stringify(car) }</p>
