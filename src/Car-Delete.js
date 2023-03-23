@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
-import CarFormName from "./Car-Create-Form";
 import CarFormNumber from "./Car-Get-Form";
 import Notification from "./Notification";
 
@@ -12,7 +11,10 @@ import URL from "./url";
 export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
 
-  const [notification, setNotification] = useState("");
+  const [notification, setNotification] = useState({
+    message: "",
+    severity: "",
+  });
 
   const [input, setInput] = useState({
     id: null,
@@ -22,7 +24,7 @@ export default function DeleteCar({ setCars }) {
   // --------------------------------------------
 
   const createCar = async () => {
-    setNotification(`Sending request...`);
+    setNotification({ message: 'Sending request...', severity: 'info' });
 
     const { id, name } = input;
     const url = `${URL}/cars/${id}`;
@@ -38,20 +40,21 @@ export default function DeleteCar({ setCars }) {
 
     if (resp.ok) {
       setCars(data?.cars);
+      setNotification({ message: data?.message, severity: 'success' });
+    } else {
+      setNotification({ message: data?.message, severity: 'error' });
     }
-    
-    setNotification(data?.message);
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <h1>Delete a Car</h1>
+      <Typography variant="h4" sx={{ mb: 2 }}>Delete a Car</Typography>
 
       <CarFormNumber {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={createCar}>
+      <Button color="secondary" variant="contained" onClick={createCar}>
         Delete Car
       </Button>
 

@@ -19,14 +19,14 @@ export default function Notification({ notification, setNotification }) {
   return (
     <Snackbar
       sx={{ mb: 4 }}
-      message={notification}
-      autoHideDuration={3e3}
-      open={!!notification}
+      // message={notification}
+      autoHideDuration={1.5e3}
+      open={!!notification.message}
       onClose={handleClose}
     >
-      {/* <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-        This is a success message!
-      </Alert> */}
+      <Alert onClose={handleClose} severity={notification.severity} sx={{ width: "100%" }}>
+        {notification.message}
+      </Alert>
     </Snackbar>
   );
 }

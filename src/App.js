@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 import GetCar from './Car-Get';
 import GetCars from "./Cars-Get";
@@ -19,7 +20,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>CRUD App</h1>
+      <Typography variant="h1">CRUD App</Typography>
 
       <hr />
 
