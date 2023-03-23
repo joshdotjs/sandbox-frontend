@@ -1,28 +1,39 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarsTable from "components/Cars-Get/Cars-Table";
+import Form from "./Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function GetCars({ cars, setCars }) {
-  // --------------------------------------------
+export default function CreateCar({ setCars }) {
+  // ---------------------------------------------
+
+  const [input, setInput] = useState({
+    name: "",
+  });
 
   const { setNotification } = useContext(NotificationContext);
 
   // --------------------------------------------
 
-  const getAllCars = async () => {
+  const createCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
     const url = `${URL}/cars`;
 
-    const resp = await fetch(url);
-    const data = await resp.json();
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: input.name }), // body data type must match "Content-Type" header
+    });
+
+    const data = await resp.json();  
     console.log("data: ", data);
 
     if (resp.ok) {
@@ -37,15 +48,13 @@ export default function GetCars({ cars, setCars }) {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>Read Cars</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Create a New Car</Typography>
 
-      <Button variant="contained" onClick={getAllCars}>
-        Read Cars
+      <Form {...{ input, setInput }} />
+
+      <Button color="secondary" variant="contained" onClick={createCar}>
+        Create Car
       </Button>
-
-      <CarsTable {...{ cars }} />
-
-      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

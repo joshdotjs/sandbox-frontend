@@ -3,18 +3,17 @@ import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarForm from "components/Car-Create/Car-Create-Form";
+import Form from "./Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function CreateCar({ setCars }) {
+export default function UpdateCar({ setCars }) {
   // ---------------------------------------------
 
-  // const [notification, setNotification] = useState("");
-
   const [input, setInput] = useState({
+    id: null,
     name: "",
   });
 
@@ -22,20 +21,19 @@ export default function CreateCar({ setCars }) {
 
   // --------------------------------------------
 
-  const createCar = async () => {
+  const updateCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
-    const url = `${URL}/cars`;
+    const { id, name } = input;
+    const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: input.name }), // body data type must match "Content-Type" header
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }), // body data type must match "Content-Type" header
     });
 
-    const data = await resp.json();  
+    const data = await resp.json();
     console.log("data: ", data);
 
     if (resp.ok) {
@@ -50,13 +48,15 @@ export default function CreateCar({ setCars }) {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>Create a New Cars</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Update Cars</Typography>
 
-      <CarForm {...{ input, setInput }} />
+      <Form {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={createCar}>
-        Create Car
+      <Button color="warning" variant="contained" onClick={updateCar}>
+        Update Car
       </Button>
+
+      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

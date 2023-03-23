@@ -3,60 +3,61 @@ import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarFormNumber from "components/Car-Get-by-ID/Car-Get-Form";
+import Form from "./Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function DeleteCar({ setCars }) {
+export default function GetCar() {
   // ---------------------------------------------
-
-  const [input, setInput] = useState({
-    id: null,
-    name: "",
-  });
 
   const { setNotification } = useContext(NotificationContext);
 
+  const [input, setInput] = useState({
+    id: null,
+  });
+
+  const [car, setCar] = useState();
+
   // --------------------------------------------
 
-  const createCar = async () => {
+  const getCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
-    const { id, name } = input;
+    const { id } = input;
     const url = `${URL}/cars/${id}`;
 
-    const resp = await fetch(url, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
-
-    const data = await resp.json();  
+    const resp = await fetch(url);
+    const data = await resp.json();
     console.log("data: ", data);
 
     if (resp.ok) {
-      setCars(data?.cars);
+      setCar(data);
       setNotification({ message: data?.message, severity: 'success' });
     } else {
       setNotification({ message: data?.message, severity: 'error' });
     }
+
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>Delete a Car</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Get a Car by ID</Typography>
 
-      <CarFormNumber {...{ input, setInput }} />
+      <Form {...{ input, setInput }} />
 
-      <Button color="secondary" variant="contained" onClick={createCar}>
-        Delete Car
+      <Button color="info" variant="contained" onClick={getCar}>
+        Get Car
       </Button>
+
+      { car && <p>{ JSON.stringify(car) }</p> }
     </>
   );
+
+  // ---------------------------------------------
 }
 
 // ==================================================

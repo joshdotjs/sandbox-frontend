@@ -3,61 +3,60 @@ import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarForm from "components/Car-Get-by-ID/Car-Get-Form";
+import Form from "./Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function GetCar() {
+export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
-
-  const { setNotification } = useContext(NotificationContext);
 
   const [input, setInput] = useState({
     id: null,
+    name: "",
   });
 
-  const [car, setCar] = useState();
+  const { setNotification } = useContext(NotificationContext);
 
   // --------------------------------------------
 
-  const getCar = async () => {
+  const createCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
-    const { id } = input;
+    const { id, name } = input;
     const url = `${URL}/cars/${id}`;
 
-    const resp = await fetch(url);
-    const data = await resp.json();
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+
+    const data = await resp.json();  
     console.log("data: ", data);
 
     if (resp.ok) {
-      setCar(data);
+      setCars(data?.cars);
       setNotification({ message: data?.message, severity: 'success' });
     } else {
       setNotification({ message: data?.message, severity: 'error' });
     }
-
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>Get a Car by ID</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Delete a Car</Typography>
 
-      <CarForm {...{ input, setInput }} />
+      <Form {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={getCar}>
-        Get Car
+      <Button color="error" variant="contained" onClick={createCar}>
+        Delete Car
       </Button>
-
-      <p>{ JSON.stringify(car) }</p>
     </>
   );
-
-  // ---------------------------------------------
 }
 
 // ==================================================
