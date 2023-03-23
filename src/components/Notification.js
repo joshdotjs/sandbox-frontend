@@ -1,10 +1,15 @@
+import { useContext } from "react";
 import { Snackbar, Alert } from "@mui/material";
-import { useState } from "react";
+
+import NotificationContext from "../context/notification-ctx";
 
 // ==================================================
 
-export default function Notification({ notification, setNotification }) {
+export default function Notification() {
   // ----------------------------------------------
+
+  const { notification, setNotification } = useContext(NotificationContext);
+
   // ----------------------------------------------
 
   const handleClose = (event, reason) => {

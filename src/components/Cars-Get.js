@@ -2,21 +2,21 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 
 import CarsTable from "./Cars-Table";
-import Notification from "./Notification";
+// import Notification from "./Notification";
 
-import URL from "./url";
+import URL from "../util/url";
 
 // ==================================================
 
 export default function GetCars({ cars, setCars }) {
   // --------------------------------------------
 
-  const [notification, setNotification] = useState("");
+  // const [notification, setNotification] = useState("");
 
   // --------------------------------------------
 
   const getAllCars = async () => {
-    setNotification(`Sending request...`);
+    // setNotification(`Sending request...`);
 
     const url = `${URL}/cars`;
 
@@ -24,7 +24,7 @@ export default function GetCars({ cars, setCars }) {
     const data = await resp.json();
 
     console.log("data: ", data);
-    setNotification(data?.message);
+    // setNotification(data?.message);
 
     setCars(data?.cars);
   };
@@ -41,7 +41,7 @@ export default function GetCars({ cars, setCars }) {
 
       <CarsTable {...{ cars }} />
 
-      <Notification {...{ notification, setNotification }} />
+      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

@@ -1,25 +1,28 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button, Typography } from "@mui/material";
 
-import CarFormNumber from "./Car-Get-Form";
-import Notification from "./Notification";
+import NotificationContext from "../context/notification-ctx";
 
-import URL from "./url";
+import CarFormNumber from "./Car-Get-Form";
+
+import URL from "../util/url";
 
 // ==================================================
 
 export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
 
-  const [notification, setNotification] = useState({
-    message: "",
-    severity: "",
-  });
+  // const [notification, setNotification] = useState({
+  //   message: "",
+  //   severity: "",
+  // });
 
   const [input, setInput] = useState({
     id: null,
     name: "",
   });
+
+  const { notification, setNotification } = useContext(NotificationContext);
 
   // --------------------------------------------
 
@@ -58,7 +61,6 @@ export default function DeleteCar({ setCars }) {
         Delete Car
       </Button>
 
-      <Notification {...{ notification, setNotification }} />
     </>
   );
 }

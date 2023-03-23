@@ -4,14 +4,14 @@ import { Button } from "@mui/material";
 import CarForm from "./Car-Create-Form";
 import Notification from "./Notification";
 
-import URL from "./url";
+import URL from "../util/url";
 
 // ==================================================
 
 export default function CreateCar({ setCars }) {
   // ---------------------------------------------
 
-  const [notification, setNotification] = useState("");
+  // const [notification, setNotification] = useState("");
 
   const [input, setInput] = useState({
     name: "",
@@ -20,7 +20,7 @@ export default function CreateCar({ setCars }) {
   // --------------------------------------------
 
   const createCar = async () => {
-    setNotification(`Sending request...`);
+    // setNotification(`Sending request...`);
 
     const url = `${URL}/cars`;
 
@@ -40,7 +40,7 @@ export default function CreateCar({ setCars }) {
       setCars(data?.cars);
     }
     
-    setNotification(data?.message);
+    // setNotification(data?.message);
   };
 
   // --------------------------------------------
@@ -55,7 +55,7 @@ export default function CreateCar({ setCars }) {
         Create Car
       </Button>
 
-      <Notification {...{ notification, setNotification }} />
+      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Typography } from "@mui/material";
 
-import GetCar from './Car-Get';
-import GetCars from "./Cars-Get";
-import CreateCar from "./Car-Create";
-import UpdateCar from "./Car-Update";
-import DeleteCar from "./Car-Delete";
+import GetCar from './components/Car-Get';
+import GetCars from "./components/Cars-Get";
+import CreateCar from "./components/Car-Create";
+import UpdateCar from "./components/Car-Update";
+import DeleteCar from "./components/Car-Delete";
+import Notification from "./components/Notification";
 
 import "./styles.css";
 
@@ -19,29 +20,33 @@ export default function App() {
   // --------------------------------------------
 
   return (
-    <div className="App">
-      <Typography variant="h1">CRUD App</Typography>
+    <>
+      <div className="App">
+        <Typography variant="h1">CRUD App</Typography>
 
-      <hr />
+        <hr />
 
-      <GetCars {...{ cars, setCars }} />
+        <GetCars {...{ cars, setCars }} />
 
-      <hr />
+        <hr />
 
-      <CreateCar {...{ setCars }} />
+        <CreateCar {...{ setCars }} />
 
-      <hr />
+        <hr />
 
-      <GetCar />
+        <GetCar />
 
-      <hr />
+        <hr />
 
-      <UpdateCar {...{ setCars }} />
+        <UpdateCar {...{ setCars }} />
 
-      <hr />
+        <hr />
 
-      <DeleteCar {...{ setCars }} />
+        <DeleteCar {...{ setCars }} />
 
-    </div>
+      </div>
+
+      <Notification />
+    </>
   );
 }
