@@ -1,36 +1,36 @@
-import { useState } from "react";
-import { Button } from "@mui/material";
+import { useState, useContext } from "react";
+import { Button, Typography } from "@mui/material";
 
-import CarFormName from "components/Car-Create-Form";
-import CarFormNumber from "components/Car-Get-Form";
-// import Notification from "./Notification";
+import NotificationContext from "context/notification-ctx";
+
+import CarFormNumber from "components/Car-Get-by-ID/Car-Get-Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function UpdateCar({ setCars }) {
+export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
-
-  // const [notification, setNotification] = useState("");
 
   const [input, setInput] = useState({
     id: null,
     name: "",
   });
 
+  const { setNotification } = useContext(NotificationContext);
+
   // --------------------------------------------
 
   const createCar = async () => {
-    // setNotification(`Sending request...`);
+    setNotification({ message: 'Sending request...', severity: 'info' });
 
     const { id, name } = input;
     const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url, {
-      method: "PATCH",
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }), // body data type must match "Content-Type" header
+      body: JSON.stringify({ name }),
     });
 
     const data = await resp.json();  
@@ -38,25 +38,23 @@ export default function UpdateCar({ setCars }) {
 
     if (resp.ok) {
       setCars(data?.cars);
+      setNotification({ message: data?.message, severity: 'success' });
+    } else {
+      setNotification({ message: data?.message, severity: 'error' });
     }
-    
-    // setNotification(data?.message);
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <h1>Update a Car</h1>
+      <Typography variant="h4" sx={{ mb: 2 }}>Delete a Car</Typography>
 
-      <CarFormName {...{ input, setInput }} />
       <CarFormNumber {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={createCar}>
-        Update Car
+      <Button color="secondary" variant="contained" onClick={createCar}>
+        Delete Car
       </Button>
-
-      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

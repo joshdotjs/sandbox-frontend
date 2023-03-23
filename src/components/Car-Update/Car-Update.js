@@ -1,15 +1,16 @@
 import { useState, useContext } from "react";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarFormNumber from "components/Car-Get-Form";
+import CarFormName from "components/Car-Create/Car-Create-Form";
+import CarFormNumber from "components/Car-Get-by-ID/Car-Get-Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function DeleteCar({ setCars }) {
+export default function UpdateCar({ setCars }) {
   // ---------------------------------------------
 
   const [input, setInput] = useState({
@@ -21,19 +22,19 @@ export default function DeleteCar({ setCars }) {
 
   // --------------------------------------------
 
-  const createCar = async () => {
+  const updateCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
     const { id, name } = input;
     const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url, {
-      method: "DELETE",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ name }), // body data type must match "Content-Type" header
     });
 
-    const data = await resp.json();  
+    const data = await resp.json();
     console.log("data: ", data);
 
     if (resp.ok) {
@@ -48,13 +49,16 @@ export default function DeleteCar({ setCars }) {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>Delete a Car</Typography>
+      <h1>Update a Car</h1>
 
+      <CarFormName {...{ input, setInput }} />
       <CarFormNumber {...{ input, setInput }} />
 
-      <Button color="secondary" variant="contained" onClick={createCar}>
-        Delete Car
+      <Button variant="contained" onClick={updateCar}>
+        Update Car
       </Button>
+
+      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

@@ -8,7 +8,7 @@ import NotificationContext from "context/notification-ctx";
 export default function Notification() {
   // ----------------------------------------------
 
-  const { notification, setNotification } = useContext(NotificationContext);
+  const { notification, resetNotification } = useContext(NotificationContext);
 
   // ----------------------------------------------
 
@@ -16,14 +16,14 @@ export default function Notification() {
     // event?: React.SyntheticEvent
     // reason?: string
     if (reason === "clickaway") return;
-    setNotification("");
+    resetNotification();
   };
 
   // ----------------------------------------------
 
   return (
     <Snackbar
-      sx={{ mb: 4 }}
+      sx={{ mb: 2, ml: 2 }}
       // message={notification}
       autoHideDuration={1.5e3}
       open={!!notification.message}

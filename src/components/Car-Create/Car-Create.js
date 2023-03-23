@@ -3,57 +3,60 @@ import { Button } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
-import CarForm from "components/Car-Get-Form";
+import CarForm from "components/Car-Create/Car-Create-Form";
 
 import URL from "util/url";
 
 // ==================================================
 
-export default function GetCar() {
+export default function CreateCar({ setCars }) {
   // ---------------------------------------------
+
+  // const [notification, setNotification] = useState("");
+
+  const [input, setInput] = useState({
+    name: "",
+  });
 
   const { setNotification } = useContext(NotificationContext);
 
-  const [input, setInput] = useState({
-    id: null,
-  });
-
-  const [car, setCar] = useState();
-
   // --------------------------------------------
 
-  const getCar = async () => {
+  const createCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
-    const { id } = input;
-    const url = `${URL}/cars/${id}`;
+    const url = `${URL}/cars`;
 
-    const resp = await fetch(url);
-    const data = await resp.json();
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: input.name }), // body data type must match "Content-Type" header
+    });
+
+    const data = await resp.json();  
     console.log("data: ", data);
 
     if (resp.ok) {
-      setCar(data);
+      setCars(data?.cars);
       setNotification({ message: data?.message, severity: 'success' });
     } else {
       setNotification({ message: data?.message, severity: 'error' });
     }
-
   };
 
   // --------------------------------------------
 
   return (
     <>
-      <h1>Get a Car</h1>
+      <h1>Create a Car</h1>
 
       <CarForm {...{ input, setInput }} />
 
-      <Button variant="contained" onClick={getCar}>
-        Get Car
+      <Button variant="contained" onClick={createCar}>
+        Create Car
       </Button>
-
-      <p>{ JSON.stringify(car) }</p>
     </>
   );
 }

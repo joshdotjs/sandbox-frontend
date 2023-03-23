@@ -2,10 +2,14 @@ import { useState, createContext } from 'react';
 
 // ==============================================
 
+const INIT_NOTIFICATION = { message: "", severity: 'info' }; 
+
+// ==============================================
+
 const NotificationContext = createContext({
   state: null,
   setState: () => {},
-  notification: { message: null, severity: null },
+  notification: INIT_NOTIFICATION,
   setNotification: () => {},
 });
 
@@ -15,17 +19,16 @@ const NotificationContextProvider = ({ children }) => {
 
   const [state, setState] = useState();
 
-  const [notification, setNotification] = useState({
-    message: null,
-    severity: "info",
-  });
+  const [notification, setNotification] = useState(INIT_NOTIFICATION);
 
+  const resetNotification = () => setNotification(INIT_NOTIFICATION);
 
   const context = {
     state,
     setState,
     notification,
     setNotification,
+    resetNotification,
   };
 
   return (
