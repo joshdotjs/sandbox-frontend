@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
@@ -50,7 +50,7 @@ export default function CreateCar({ setCars }) {
 
   return (
     <>
-      <h1>Create a Car</h1>
+      <Typography variant="h4" sx={{ mb: 2 }}>Create a New Cars</Typography>
 
       <CarForm {...{ input, setInput }} />
 

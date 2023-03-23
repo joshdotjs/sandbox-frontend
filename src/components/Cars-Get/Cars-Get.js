@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
 
@@ -37,7 +37,7 @@ export default function GetCars({ cars, setCars }) {
 
   return (
     <>
-      <h1>Read Cars</h1>
+      <Typography variant="h4" sx={{ mb: 2 }}>Read Cars</Typography>
 
       <Button variant="contained" onClick={getAllCars}>
         Read Cars
