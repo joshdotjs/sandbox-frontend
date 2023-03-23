@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@mui/material";
 
+import NotificationContext from "../context/notification-ctx";
+
 import CarForm from "./Car-Get-Form";
-// import Notification from "./Notification";
 
 import URL from "../util/url";
 
@@ -11,7 +12,7 @@ import URL from "../util/url";
 export default function GetCar() {
   // ---------------------------------------------
 
-  // const [notification, setNotification] = useState("");
+  const { setNotification } = useContext(NotificationContext);
 
   const [input, setInput] = useState({
     id: null,
@@ -22,19 +23,22 @@ export default function GetCar() {
   // --------------------------------------------
 
   const getCar = async () => {
-    // setNotification(`Sending request...`);
+    setNotification({ message: 'Sending request...', severity: 'info' });
 
     const { id } = input;
     const url = `${URL}/cars/${id}`;
 
     const resp = await fetch(url);
     const data = await resp.json();
-
     console.log("data: ", data);
-    // setNotification(data?.message);
 
-    // setCar(data?.cars);
-    setCar(data);
+    if (resp.ok) {
+      setCar(data);
+      setNotification({ message: data?.message, severity: 'success' });
+    } else {
+      setNotification({ message: data?.message, severity: 'error' });
+    }
+
   };
 
   // --------------------------------------------
@@ -50,8 +54,6 @@ export default function GetCar() {
       </Button>
 
       <p>{ JSON.stringify(car) }</p>
-
-      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

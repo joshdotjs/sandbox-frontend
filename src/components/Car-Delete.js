@@ -12,17 +12,12 @@ import URL from "../util/url";
 export default function DeleteCar({ setCars }) {
   // ---------------------------------------------
 
-  // const [notification, setNotification] = useState({
-  //   message: "",
-  //   severity: "",
-  // });
-
   const [input, setInput] = useState({
     id: null,
     name: "",
   });
 
-  const { notification, setNotification } = useContext(NotificationContext);
+  const { setNotification } = useContext(NotificationContext);
 
   // --------------------------------------------
 
@@ -60,7 +55,6 @@ export default function DeleteCar({ setCars }) {
       <Button color="secondary" variant="contained" onClick={createCar}>
         Delete Car
       </Button>
-
     </>
   );
 }
