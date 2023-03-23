@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Button, Typography } from "@mui/material";
 
 import NotificationContext from "context/notification-ctx";
@@ -13,6 +13,13 @@ export default function GetCars({ cars, setCars }) {
   // --------------------------------------------
 
   const { setNotification } = useContext(NotificationContext);
+
+  // --------------------------------------------
+
+  useEffect(() => {
+    // (async () => await getAllCars())();
+    getAllCars();
+  }, []);
 
   // --------------------------------------------
 

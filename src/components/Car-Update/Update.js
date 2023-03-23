@@ -55,8 +55,6 @@ export default function UpdateCar({ setCars }) {
       <Button color="warning" variant="contained" onClick={updateCar}>
         Update Car
       </Button>
-
-      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }
