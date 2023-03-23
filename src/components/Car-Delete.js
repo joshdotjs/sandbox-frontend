@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { Button, Typography } from "@mui/material";
 
-import NotificationContext from "../context/notification-ctx";
+import NotificationContext from "context/notification-ctx";
 
-import CarFormNumber from "./Car-Get-Form";
+import CarFormNumber from "components/Car-Get-Form";
 
-import URL from "../util/url";
+import URL from "util/url";
 
 // ==================================================
 

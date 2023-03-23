@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { ThemeProvider, createTheme } from '@mui/material';
 // import { orange } from '@mui/material/colors';
 
-import { NotificationContextProvider } from './context/notification-ctx';
+import { NotificationContextProvider } from 'context/notification-ctx';
 
 import App from "./App";
 

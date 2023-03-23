@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-import CarsTable from "./Cars-Table";
+import CarsTable from "components/Cars-Table";
 // import Notification from "./Notification";
 
-import URL from "../util/url";
+import URL from "util/url";
 
 // ==================================================
 

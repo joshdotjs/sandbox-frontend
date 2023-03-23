@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-import CarForm from "./Car-Create-Form";
-import Notification from "./Notification";
+import CarForm from "components/Car-Create-Form";
 
-import URL from "../util/url";
+import URL from "util/url";
 
 // ==================================================
 
@@ -54,8 +53,6 @@ export default function CreateCar({ setCars }) {
       <Button variant="contained" onClick={createCar}>
         Create Car
       </Button>
-
-      {/* <Notification {...{ notification, setNotification }} /> */}
     </>
   );
 }

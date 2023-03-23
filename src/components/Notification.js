@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Snackbar, Alert } from "@mui/material";
 
-import NotificationContext from "../context/notification-ctx";
+import NotificationContext from "context/notification-ctx";
 
 // ==================================================
 
