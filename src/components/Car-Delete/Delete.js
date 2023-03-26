@@ -21,7 +21,7 @@ export default function DeleteCar({ setCars }) {
 
   // --------------------------------------------
 
-  const createCar = async () => {
+  const deleteCar = async () => {
     setNotification({ message: 'Sending request...', severity: 'info' });
 
     const { id, name } = input;
@@ -52,7 +52,7 @@ export default function DeleteCar({ setCars }) {
 
       <Form {...{ input, setInput }} />
 
-      <Button color="error" variant="contained" onClick={createCar}>
+      <Button color="error" variant="contained" onClick={() => alert('coming soon!')}>
         Delete Car
       </Button>
     </>
