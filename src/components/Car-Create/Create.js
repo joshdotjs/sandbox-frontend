@@ -52,7 +52,7 @@ export default function CreateCar({ setCars }) {
 
       <Form {...{ input, setInput }} />
 
-      <Button color="secondary" variant="contained" onClick={createCar}>
+      <Button color="secondary" variant="contained" onClick={() => alert('coming soon!')}>
         Create Car
       </Button>
     </>
